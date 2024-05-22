@@ -13,9 +13,9 @@ const bookController = {
             const username = req.body.name
             const password = req.body.description;
             
-            const queri = `SELECT * FROM users WHERE username = '${username}' AND password = '${password}'`
+            const queri = 'SELECT * FROM users WHERE username = $1 AND password = $2'
             console.log(queri)
-            const result = await postgre.query(queri);
+            const result = await postgre.query(queri, [username, password]);
             //console.log(result)
             if (result.rows == 0) {
               res.json({ stat: 'failed' })
