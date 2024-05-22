@@ -10,14 +10,14 @@ const bookController = {
     },
     checkUser: async(req, res) => {
         try {
-            const username = req.body.name
-            const password = req.body.description;
+            const username = req.body.username;
+            const password = req.body.password;
             
             const queri = 'SELECT * FROM users WHERE username = $1 AND password = $2'
             console.log(queri)
             const result = await postgre.query(queri, [username, password]);
             //console.log(result)
-            if (result.rows == 0) {
+            if (result.rows === 0) {
               res.json({ stat: 'failed' })
             }
             else{
